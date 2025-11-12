@@ -9,10 +9,10 @@ import CoverageMap from '../components/CoverageMap.astro';
 	<Header />
 	
 	<main>
-		<section class="section">
-			<div class="container">
-				<h1 class="section-title">Карта покрытия</h1>
-				<p class="section-subtitle">Проверьте доступность интернета в вашем районе</p>
+		<section class="py-16 md:py-24">
+			<div class="container mx-auto px-4 md:px-8 max-w-7xl">
+				<h1 class="text-4xl md:text-5xl mb-4 text-[#1a1a2e] dark:text-white text-center">Карта покрытия</h1>
+				<p class="text-xl text-gray-600 dark:text-gray-300 text-center mb-12">Проверьте доступность интернета в вашем районе</p>
 				<CoverageMap />
 			</div>
 		</section>
@@ -20,4 +20,3 @@ import CoverageMap from '../components/CoverageMap.astro';
 
 	<Footer />
 </BaseLayout>
-

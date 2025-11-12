@@ -26,19 +26,23 @@ const formattedDate = new Intl.DateTimeFormat('ru-RU', {
 	<Header />
 	
 	<main>
-		<article class="news-article">
-			<div class="container">
-				<div class="news-article__header">
-					<a href="/news" class="news-article__back">← Назад к новостям</a>
-					<div class="news-article__date">{formattedDate}</div>
-					<h1 class="news-article__title">{title}!!!!</h1>
-					{image && (
-						<div class="news-article__image">
-							<img src={image} alt={title} />
-						</div>
-					)}
+		<article class="py-16 md:py-24">
+			<div class="container mx-auto px-4 md:px-8 max-w-7xl">
+				<div class="max-w-3xl mx-auto mb-12">
+					<a href="/news" class="inline-block text-[#4a9eff] no-underline mb-4 transition-colors hover:text-[#357abd]">← Назад к новостям</a>
+					<div class="text-gray-600 dark:text-gray-400 text-sm mb-4">{formattedDate}</div>
+					<h1 class="text-4xl md:text-5xl mb-8 text-[#1a1a2e] dark:text-white leading-tight">{title}</h1>
+					<div class="w-full h-64 md:h-96 overflow-hidden rounded-lg mb-8">
+						{image ? (
+							<img src={image} alt={title} class="w-full h-full object-cover" />
+						) : (
+							<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#4a9eff] to-[#357abd]">
+								<span class="text-white text-3xl font-bold opacity-80">Новости</span>
+							</div>
+						)}
+					</div>
 				</div>
-				<div class="news-article__content">
+				<div class="max-w-3xl mx-auto leading-relaxed text-gray-800 dark:text-gray-200 prose prose-lg prose-headings:text-[#1a1a2e] dark:prose-headings:text-white prose-a:text-[#4a9eff] prose-a:no-underline hover:prose-a:underline">
 					<Content />
 				</div>
 			</div>
@@ -49,110 +53,29 @@ const formattedDate = new Intl.DateTimeFormat('ru-RU', {
 </BaseLayout>
 
 <style>
-	.news-article {
-		padding: 4rem 0;
-	}
-
-	.news-article__header {
-		max-width: 800px;
-		margin: 0 auto 3rem;
-	}
-
-	.news-article__back {
-		display: inline-block;
-		color: #4a9eff;
-		text-decoration: none;
-		margin-bottom: 1rem;
-		transition: color 0.3s;
-	}
-
-	.news-article__back:hover {
-		color: #357abd;
-	}
-
-	.news-article__date {
-		color: #666;
-		font-size: 0.9rem;
-		margin-bottom: 1rem;
-	}
-
-	.news-article__title {
-		font-size: 2.5rem;
-		margin-bottom: 2rem;
-		color: #1a1a2e;
-		line-height: 1.2;
-	}
-
-	.news-article__image {
-		width: 100%;
-		height: 400px;
-		overflow: hidden;
-		border-radius: 10px;
-		margin-bottom: 2rem;
-	}
-
-	.news-article__image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.news-article__content {
-		max-width: 800px;
-		margin: 0 auto;
-		line-height: 1.8;
-		color: #333;
-	}
-
-	.news-article__content :global(h2) {
+	:global(.prose h2) {
 		font-size: 2rem;
 		margin-top: 2rem;
 		margin-bottom: 1rem;
-		color: #1a1a2e;
 	}
 
-	.news-article__content :global(h3) {
+	:global(.prose h3) {
 		font-size: 1.5rem;
 		margin-top: 1.5rem;
 		margin-bottom: 0.75rem;
-		color: #1a1a2e;
 	}
 
-	.news-article__content :global(p) {
+	:global(.prose p) {
 		margin-bottom: 1.5rem;
 	}
 
-	.news-article__content :global(ul),
-	.news-article__content :global(ol) {
+	:global(.prose ul),
+	:global(.prose ol) {
 		margin-bottom: 1.5rem;
 		padding-left: 2rem;
 	}
 
-	.news-article__content :global(li) {
+	:global(.prose li) {
 		margin-bottom: 0.5rem;
 	}
-
-	.news-article__content :global(a) {
-		color: #4a9eff;
-		text-decoration: none;
-	}
-
-	.news-article__content :global(a:hover) {
-		text-decoration: underline;
-	}
-
-	@media (max-width: 768px) {
-		.news-article {
-			padding: 2rem 0;
-		}
-
-		.news-article__title {
-			font-size: 2rem;
-		}
-
-		.news-article__image {
-			height: 250px;
-		}
-	}
 </style>
-

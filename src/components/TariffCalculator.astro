@@ -1,7 +1,7 @@
 ---
 ---
 
-<div class="tariff-calculator" x-data="{
+<div class="bg-white dark:bg-gray-800 p-6 md:p-8 rounded-lg shadow-md" x-data="{
 	speed: 100,
 	price: 500,
 	tariffs: [
@@ -38,27 +38,27 @@
 		}
 	}
 }">
-	<h2>Калькулятор тарифов</h2>
-	<div class="calculator-content">
-		<div class="tariff-selector">
-			<h3>Выберите тариф</h3>
-			<div class="tariff-cards">
+	<h2 class="mt-0 mb-8 text-[#1a1a2e] dark:text-white">Калькулятор тарифов</h2>
+	<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+		<div>
+			<h3 class="mb-4 text-gray-800 dark:text-gray-200">Выберите тариф</h3>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
 				<template x-for="tariff in tariffs" :key="tariff.speed">
 					<button
 						@click="selectTariff(tariff)"
-						:class="{ 'active': selectedTariff && selectedTariff.speed === tariff.speed }"
-						class="tariff-card"
+						:class="selectedTariff && selectedTariff.speed === tariff.speed ? 'border-[#4a9eff] bg-blue-50 dark:bg-blue-900/30' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-700'"
+						class="p-6 border-2 rounded-lg cursor-pointer transition-all text-center hover:border-[#4a9eff] hover:-translate-y-0.5 hover:shadow-lg"
 					>
-						<div class="tariff-name" x-text="tariff.name"></div>
-						<div class="tariff-speed" x-text="tariff.speed + ' Мбит/с'"></div>
-						<div class="tariff-price" x-text="tariff.price + ' ₽/мес'"></div>
+						<div class="font-bold text-lg mb-2 text-[#1a1a2e] dark:text-white" x-text="tariff.name"></div>
+						<div class="text-sm text-gray-600 dark:text-gray-300 mb-2" x-text="tariff.speed + ' Мбит/с'"></div>
+						<div class="text-xl font-bold text-[#4a9eff]" x-text="tariff.price + ' ₽/мес'"></div>
 					</button>
 				</template>
 			</div>
 		</div>
-		<div class="calculator-controls">
-			<div class="form-group">
-				<label for="speed">Скорость: <span x-text="speed"></span> Мбит/с</label>
+		<div class="flex flex-col gap-8">
+			<div>
+				<label for="speed" class="block mb-4 text-gray-700 dark:text-gray-300 font-medium">Скорость: <span x-text="speed"></span> Мбит/с</label>
 				<input 
 					type="range" 
 					id="speed"
@@ -67,182 +67,19 @@
 					step="10"
 					x-model="speed"
 					@input="calculatePrice()"
+					class="w-full h-2 rounded-md bg-gray-200 outline-none appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#4a9eff] [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#4a9eff] [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-none"
 				/>
 			</div>
-			<div class="result">
-				<div class="result-item">
-					<span class="result-label">Скорость:</span>
-					<span class="result-value" x-text="speed + ' Мбит/с'"></span>
+			<div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
+				<div class="flex justify-between mb-4">
+					<span class="text-gray-600 dark:text-gray-300">Скорость:</span>
+					<span class="font-bold text-[#1a1a2e] dark:text-white" x-text="speed + ' Мбит/с'"></span>
 				</div>
-				<div class="result-item">
-					<span class="result-label">Стоимость:</span>
-					<span class="result-value price" x-text="price + ' ₽/мес'"></span>
+				<div class="flex justify-between">
+					<span class="text-gray-600 dark:text-gray-300">Стоимость:</span>
+					<span class="text-2xl font-bold text-[#4a9eff]" x-text="price + ' ₽/мес'"></span>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-<style>
-	.tariff-calculator {
-		background: white;
-		padding: 2rem;
-		border-radius: 10px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
-
-	.tariff-calculator h2 {
-		margin-top: 0;
-		margin-bottom: 2rem;
-		color: #1a1a2e;
-	}
-
-	.calculator-content {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 2rem;
-	}
-
-	.tariff-selector h3 {
-		margin-bottom: 1rem;
-		color: #333;
-	}
-
-	.tariff-cards {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-		gap: 1rem;
-	}
-
-	.tariff-card {
-		padding: 1.5rem;
-		border: 2px solid #e0e0e0;
-		border-radius: 8px;
-		background: white;
-		cursor: pointer;
-		transition: all 0.3s;
-		text-align: center;
-	}
-
-	.tariff-card:hover {
-		border-color: #4a9eff;
-		transform: translateY(-2px);
-		box-shadow: 0 4px 8px rgba(74, 158, 255, 0.2);
-	}
-
-	.tariff-card.active {
-		border-color: #4a9eff;
-		background: #f0f7ff;
-	}
-
-	.tariff-name {
-		font-weight: bold;
-		font-size: 1.1rem;
-		margin-bottom: 0.5rem;
-		color: #1a1a2e;
-	}
-
-	.tariff-speed {
-		font-size: 0.9rem;
-		color: #666;
-		margin-bottom: 0.5rem;
-	}
-
-	.tariff-price {
-		font-size: 1.2rem;
-		font-weight: bold;
-		color: #4a9eff;
-	}
-
-	.calculator-controls {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-	}
-
-	.form-group label {
-		display: block;
-		margin-bottom: 1rem;
-		color: #333;
-		font-weight: 500;
-	}
-
-	.form-group input[type="range"] {
-		width: 100%;
-		height: 8px;
-		border-radius: 5px;
-		background: #e0e0e0;
-		outline: none;
-		-webkit-appearance: none;
-	}
-
-	.form-group input[type="range"]::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		appearance: none;
-		width: 20px;
-		height: 20px;
-		border-radius: 50%;
-		background: #4a9eff;
-		cursor: pointer;
-	}
-
-	.form-group input[type="range"]::-moz-range-thumb {
-		width: 20px;
-		height: 20px;
-		border-radius: 50%;
-		background: #4a9eff;
-		cursor: pointer;
-		border: none;
-	}
-
-	.result {
-		background: #f8f9fa;
-		padding: 1.5rem;
-		border-radius: 8px;
-	}
-
-	.result-item {
-		display: flex;
-		justify-content: space-between;
-		margin-bottom: 1rem;
-	}
-
-	.result-item:last-child {
-		margin-bottom: 0;
-	}
-
-	.result-label {
-		color: #666;
-	}
-
-	.result-value {
-		font-weight: bold;
-		color: #1a1a2e;
-	}
-
-	.result-value.price {
-		font-size: 1.5rem;
-		color: #4a9eff;
-	}
-
-	@media (max-width: 968px) {
-		.calculator-content {
-			grid-template-columns: 1fr;
-		}
-
-		.tariff-cards {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (max-width: 768px) {
-		.tariff-calculator {
-			padding: 1.5rem;
-		}
-
-		.tariff-cards {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
-

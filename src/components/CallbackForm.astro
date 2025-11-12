@@ -1,7 +1,7 @@
 ---
 ---
 
-<div class="callback-form" x-data="{ 
+<div class="bg-white dark:bg-gray-800 p-6 md:p-8 rounded-lg shadow-md" x-data="{ 
 	phone: '', 
 	submitted: false,
 	loading: false,
@@ -15,102 +15,29 @@
 		}, 1000);
 	}
 }">
-	<h2>Заказать обратный звонок</h2>
+	<h2 class="mt-0 mb-6 text-[#1a1a2e] dark:text-white">Заказать обратный звонок</h2>
 	<form @submit.prevent="submitForm()" x-show="!submitted">
-		<div class="form-group">
-			<label for="callback-phone">Ваш телефон</label>
+		<div class="mb-6">
+			<label for="callback-phone" class="block mb-2 text-gray-700 dark:text-gray-300 font-medium">Ваш телефон</label>
 			<input 
 				type="tel" 
 				id="callback-phone"
 				x-model="phone"
 				placeholder="+7 (___) ___-__-__"
 				required
+				class="w-full px-3 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md text-base transition-colors focus:outline-none focus:border-[#4a9eff]"
 			/>
 		</div>
-		<button type="submit" :disabled="loading" class="btn btn-primary">
+		<button 
+			type="submit" 
+			:disabled="loading" 
+			class="px-8 py-3 border-none rounded-md text-base cursor-pointer transition-all bg-[#4a9eff] text-white hover:bg-[#357abd] disabled:opacity-60 disabled:cursor-not-allowed"
+		>
 			<span x-show="!loading">Заказать звонок</span>
 			<span x-show="loading">Отправка...</span>
 		</button>
 	</form>
-	<div x-show="submitted" class="success-message">
+	<div x-show="submitted" class="bg-green-100 text-green-800 p-4 rounded-md text-center">
 		<p>Спасибо! Мы свяжемся с вами в ближайшее время.</p>
 	</div>
 </div>
-
-<style>
-	.callback-form {
-		background: white;
-		padding: 2rem;
-		border-radius: 10px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
-
-	.callback-form h2 {
-		margin-top: 0;
-		margin-bottom: 1.5rem;
-		color: #1a1a2e;
-	}
-
-	.form-group {
-		margin-bottom: 1.5rem;
-	}
-
-	.form-group label {
-		display: block;
-		margin-bottom: 0.5rem;
-		color: #333;
-		font-weight: 500;
-	}
-
-	.form-group input {
-		width: 100%;
-		padding: 0.75rem;
-		border: 2px solid #e0e0e0;
-		border-radius: 5px;
-		font-size: 1rem;
-		transition: border-color 0.3s;
-	}
-
-	.form-group input:focus {
-		outline: none;
-		border-color: #4a9eff;
-	}
-
-	.btn {
-		padding: 0.75rem 2rem;
-		border: none;
-		border-radius: 5px;
-		font-size: 1rem;
-		cursor: pointer;
-		transition: all 0.3s;
-	}
-
-	.btn-primary {
-		background: #4a9eff;
-		color: white;
-	}
-
-	.btn-primary:hover:not(:disabled) {
-		background: #357abd;
-	}
-
-	.btn:disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-	}
-
-	.success-message {
-		background: #d4edda;
-		color: #155724;
-		padding: 1rem;
-		border-radius: 5px;
-		text-align: center;
-	}
-
-	@media (max-width: 768px) {
-		.callback-form {
-			padding: 1.5rem;
-		}
-	}
-</style>
-

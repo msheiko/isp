@@ -1,9 +1,9 @@
 ---
 ---
 
-<div class="coverage-map">
-	<h2>Карта покрытия</h2>
-	<div class="map-container" x-data="{ 
+<div class="bg-white dark:bg-gray-800 p-6 md:p-8 rounded-lg shadow-md">
+	<h2 class="mt-0 mb-8 text-[#1a1a2e] dark:text-white">Карта покрытия</h2>
+	<div class="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8" x-data="{ 
 		selectedArea: null,
 		areas: [
 			{ id: 1, name: 'Центральный район', coverage: 95, color: '#4a9eff' },
@@ -16,212 +16,44 @@
 			this.selectedArea = area;
 		}
 	}">
-		<div class="map-legend">
-			<h3>Легенда покрытия</h3>
-			<div class="legend-items">
+		<div>
+			<h3 class="mb-4 text-gray-800 dark:text-gray-200">Легенда покрытия</h3>
+			<div class="flex flex-col gap-2">
 				<template x-for="area in areas" :key="area.id">
 					<div 
-						class="legend-item"
+						class="flex items-center gap-3 p-3 border-2 rounded-md cursor-pointer transition-all"
+						:class="selectedArea && selectedArea.id === area.id ? 'border-[#4a9eff] bg-blue-50 dark:bg-blue-900/30' : 'border-gray-200 dark:border-gray-700 hover:border-[#4a9eff] hover:bg-blue-50 dark:hover:bg-blue-900/30'"
 						@click="selectArea(area)"
-						:class="{ 'active': selectedArea && selectedArea.id === area.id }"
 					>
-						<span class="legend-color" :style="`background: ${area.color}`"></span>
-						<span x-text="area.name"></span>
-						<span class="legend-coverage" x-text="`${area.coverage}%`"></span>
+						<span class="w-5 h-5 rounded" :style="`background: ${area.color}`"></span>
+						<span x-text="area.name" class="flex-1"></span>
+						<span class="font-bold text-[#4a9eff]" x-text="`${area.coverage}%`"></span>
 					</div>
 				</template>
 			</div>
 		</div>
-		<div class="map-visual">
-			<div class="map-grid">
-				<template x-for="area in areas" :key="area.id">
-					<div 
-						class="map-area"
-						:style="`background: ${area.color}; opacity: ${area.coverage / 100}`"
-						@click="selectArea(area)"
-						:class="{ 'selected': selectedArea && selectedArea.id === area.id }"
-					>
-						<div class="area-label" x-text="area.name"></div>
-						<div class="area-coverage" x-text="`${area.coverage}%`"></div>
-					</div>
-				</template>
+		<div>
+			<div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 min-h-[400px]">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-full">
+					<template x-for="area in areas" :key="area.id">
+						<div 
+							class="rounded-lg p-4 cursor-pointer transition-all flex flex-col justify-center items-center text-white relative"
+							:style="`background: ${area.color}; opacity: ${area.coverage / 100}`"
+							:class="selectedArea && selectedArea.id === area.id ? 'ring-4 ring-[#1a1a2e] ring-offset-2' : ''"
+							@click="selectArea(area)"
+						>
+							<div class="font-bold text-lg mb-2 drop-shadow-md" x-text="area.name"></div>
+							<div class="text-2xl font-bold drop-shadow-md" x-text="`${area.coverage}%`"></div>
+						</div>
+					</template>
+				</div>
 			</div>
 		</div>
-		<div x-show="selectedArea" class="area-info">
-			<h3 x-text="selectedArea?.name"></h3>
-			<p>Покрытие: <strong x-text="`${selectedArea?.coverage}%`"></strong></p>
-			<p>Статус: <strong>Доступно</strong></p>
-			<button class="btn btn-primary">Подключить</button>
+		<div x-show="selectedArea" class="lg:col-span-2 bg-gray-50 dark:bg-gray-700 p-6 rounded-lg mt-4">
+			<h3 class="mt-0 text-[#1a1a2e] dark:text-white" x-text="selectedArea?.name"></h3>
+			<p class="my-2 text-gray-600 dark:text-gray-300">Покрытие: <strong x-text="`${selectedArea?.coverage}%`"></strong></p>
+			<p class="my-2 text-gray-600 dark:text-gray-300">Статус: <strong>Доступно</strong></p>
+			<button class="mt-4 px-8 py-3 border-none rounded-md text-base cursor-pointer transition-all bg-[#4a9eff] text-white hover:bg-[#357abd]">Подключить</button>
 		</div>
 	</div>
 </div>
-
-<style>
-	.coverage-map {
-		background: white;
-		padding: 2rem;
-		border-radius: 10px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
-
-	.coverage-map h2 {
-		margin-top: 0;
-		margin-bottom: 2rem;
-		color: #1a1a2e;
-	}
-
-	.map-container {
-		display: grid;
-		grid-template-columns: 300px 1fr;
-		gap: 2rem;
-	}
-
-	.map-legend h3 {
-		margin-bottom: 1rem;
-		color: #333;
-	}
-
-	.legend-items {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.legend-item {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		padding: 0.75rem;
-		border: 2px solid #e0e0e0;
-		border-radius: 5px;
-		cursor: pointer;
-		transition: all 0.3s;
-	}
-
-	.legend-item:hover,
-	.legend-item.active {
-		border-color: #4a9eff;
-		background: #f0f7ff;
-	}
-
-	.legend-color {
-		width: 20px;
-		height: 20px;
-		border-radius: 3px;
-	}
-
-	.legend-coverage {
-		margin-left: auto;
-		font-weight: bold;
-		color: #4a9eff;
-	}
-
-	.map-visual {
-		background: #f8f9fa;
-		border-radius: 8px;
-		padding: 1rem;
-		min-height: 400px;
-	}
-
-	.map-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: repeat(2, 1fr);
-		gap: 1rem;
-		height: 100%;
-	}
-
-	.map-area {
-		border-radius: 8px;
-		padding: 1rem;
-		cursor: pointer;
-		transition: all 0.3s;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		color: white;
-		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-		position: relative;
-	}
-
-	.map-area:hover {
-		transform: scale(1.05);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-	}
-
-	.map-area.selected {
-		border: 3px solid #1a1a2e;
-		box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.3);
-	}
-
-	.area-label {
-		font-weight: bold;
-		font-size: 1.1rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.area-coverage {
-		font-size: 1.5rem;
-		font-weight: bold;
-	}
-
-	.area-info {
-		grid-column: 1 / -1;
-		background: #f8f9fa;
-		padding: 1.5rem;
-		border-radius: 8px;
-		margin-top: 1rem;
-	}
-
-	.area-info h3 {
-		margin-top: 0;
-		color: #1a1a2e;
-	}
-
-	.area-info p {
-		margin: 0.5rem 0;
-		color: #666;
-	}
-
-	.btn {
-		padding: 0.75rem 2rem;
-		border: none;
-		border-radius: 5px;
-		font-size: 1rem;
-		cursor: pointer;
-		transition: all 0.3s;
-		margin-top: 1rem;
-	}
-
-	.btn-primary {
-		background: #4a9eff;
-		color: white;
-	}
-
-	.btn-primary:hover {
-		background: #357abd;
-	}
-
-	@media (max-width: 968px) {
-		.map-container {
-			grid-template-columns: 1fr;
-		}
-
-		.map-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (max-width: 768px) {
-		.coverage-map {
-			padding: 1.5rem;
-		}
-
-		.map-grid {
-			grid-template-columns: 1fr;
-			grid-template-rows: repeat(5, 150px);
-		}
-	}
-</style>
-

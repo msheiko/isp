@@ -1,66 +1,26 @@
 ---
 ---
 
-<footer class="footer">
-	<div class="container">
-		<div class="footer__content">
-			<div class="footer__section">
-				<h3>О компании</h3>
-				<p>Надежный интернет-провайдер с многолетним опытом работы</p>
+<footer class="bg-[#1a1a2e] text-white py-12 pb-4 mt-16">
+	<div class="container mx-auto px-4 md:px-8 max-w-7xl">
+		<div class="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-8 mb-8">
+			<div>
+				<h3 class="mb-4 text-[#4a9eff]">О компании</h3>
+				<p class="my-2 opacity-90">Надежный интернет-провайдер с многолетним опытом работы</p>
 			</div>
-			<div class="footer__section">
-				<h3>Контакты</h3>
-				<p>Телефон: +7 (800) 123-45-67</p>
-				<p>Email: info@ispprovider.ru</p>
+			<div>
+				<h3 class="mb-4 text-[#4a9eff]">Контакты</h3>
+				<p class="my-2 opacity-90">Телефон: +7 (800) 123-45-67</p>
+				<p class="my-2 opacity-90">Email: info@ispprovider.ru</p>
 			</div>
-			<div class="footer__section">
-				<h3>Режим работы</h3>
-				<p>Пн-Пт: 9:00 - 20:00</p>
-				<p>Сб-Вс: 10:00 - 18:00</p>
+			<div>
+				<h3 class="mb-4 text-[#4a9eff]">Режим работы</h3>
+				<p class="my-2 opacity-90">Пн-Пт: 9:00 - 20:00</p>
+				<p class="my-2 opacity-90">Сб-Вс: 10:00 - 18:00</p>
 			</div>
 		</div>
-		<div class="footer__bottom">
+		<div class="text-center pt-8 border-t border-white/10 opacity-80">
 			<p>&copy; 2024 ISP Provider. Все права защищены.</p>
 		</div>
 	</div>
 </footer>
-
-<style>
-	.footer {
-		background: #1a1a2e;
-		color: white;
-		padding: 3rem 0 1rem;
-		margin-top: 4rem;
-	}
-
-	.footer__content {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 2rem;
-		margin-bottom: 2rem;
-	}
-
-	.footer__section h3 {
-		margin-bottom: 1rem;
-		color: #4a9eff;
-	}
-
-	.footer__section p {
-		margin: 0.5rem 0;
-		opacity: 0.9;
-	}
-
-	.footer__bottom {
-		text-align: center;
-		padding-top: 2rem;
-		border-top: 1px solid rgba(255, 255, 255, 0.1);
-		opacity: 0.8;
-	}
-
-	@media (max-width: 768px) {
-		.footer__content {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
-

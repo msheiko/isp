@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
 	title: string;
 	description?: string;
@@ -16,9 +18,19 @@ const { title, description = "Интернет-провайдер - быстры
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<link rel="stylesheet" href="/styles/global.css" />
+		<script is:inline>
+			// Инициализация темы до загрузки страницы (предотвращает мерцание)
+			(function() {
+				const theme = localStorage.getItem('theme') || 'light';
+				if (theme === 'dark') {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
+			})();
+		</script>
 	</head>
-	<body>
+	<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors">
 		<slot />
 		<script>
 			import '../scripts/alpine.js';

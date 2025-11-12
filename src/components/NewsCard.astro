@@ -14,76 +14,20 @@ const formattedDate = new Intl.DateTimeFormat('ru-RU', {
 }).format(pubDate);
 ---
 
-<article class="news-card">
-	<div class="news-card__image">
-		<img src={image || "/placeholder-news.jpg"} alt={title} />
+<article class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md transition-all hover:-translate-y-1 hover:shadow-lg">
+	<div class="w-full h-48 overflow-hidden bg-gray-200 dark:bg-gray-700">
+		{image ? (
+			<img src={image} alt={title} class="w-full h-full object-cover" />
+		) : (
+			<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#4a9eff] to-[#357abd]">
+				<span class="text-white text-2xl font-bold opacity-80">Новости</span>
+			</div>
+		)}
 	</div>
-	<div class="news-card__content">
-		<div class="news-card__date">{formattedDate}</div>
-		<h3 class="news-card__title">{title}</h3>
-		<p class="news-card__excerpt">{description}</p>
-		<a href={`/news/${entry.slug}`} class="news-card__link">Читать далее →</a>
+	<div class="p-6">
+		<div class="text-gray-600 dark:text-gray-400 text-sm mb-2">{formattedDate}</div>
+		<h3 class="m-0 mb-4 text-[#1a1a2e] dark:text-white text-xl">{title}</h3>
+		<p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">{description}</p>
+		<a href={`/news/${entry.slug}`} class="text-[#4a9eff] no-underline font-medium transition-colors hover:text-[#357abd]">Читать далее →</a>
 	</div>
 </article>
-
-<style>
-	.news-card {
-		background: white;
-		border-radius: 10px;
-		overflow: hidden;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-		transition: transform 0.3s, box-shadow 0.3s;
-	}
-
-	.news-card:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-	}
-
-	.news-card__image {
-		width: 100%;
-		height: 200px;
-		overflow: hidden;
-		background: #e0e0e0;
-	}
-
-	.news-card__image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.news-card__content {
-		padding: 1.5rem;
-	}
-
-	.news-card__date {
-		color: #666;
-		font-size: 0.9rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.news-card__title {
-		margin: 0 0 1rem;
-		color: #1a1a2e;
-		font-size: 1.25rem;
-	}
-
-	.news-card__excerpt {
-		color: #666;
-		line-height: 1.6;
-		margin-bottom: 1rem;
-	}
-
-	.news-card__link {
-		color: #4a9eff;
-		text-decoration: none;
-		font-weight: 500;
-		transition: color 0.3s;
-	}
-
-	.news-card__link:hover {
-		color: #357abd;
-	}
-</style>
-

@@ -10,35 +10,35 @@ import CallbackForm from '../components/CallbackForm.astro';
 	<Header />
 	
 	<main>
-		<section class="section">
-			<div class="container">
-				<h1 class="section-title">Контакты</h1>
-				<div class="contacts-grid">
-					<div class="contacts-info">
-						<h2>Свяжитесь с нами</h2>
-						<div class="contact-item">
-							<h3>Телефон</h3>
-							<p>+7 (800) 123-45-67</p>
-							<p>+7 (495) 123-45-67</p>
+		<section class="py-16 md:py-24">
+			<div class="container mx-auto px-4 md:px-8 max-w-7xl">
+				<h1 class="text-4xl md:text-5xl mb-4 text-[#1a1a2e] dark:text-white text-center">Контакты</h1>
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-8">
+					<div>
+						<h2 class="mb-8 text-[#1a1a2e] dark:text-white">Свяжитесь с нами</h2>
+						<div class="mb-8 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+							<h3 class="mb-2 text-[#4a9eff]">Телефон</h3>
+							<p class="my-1 text-gray-600 dark:text-gray-300">+7 (800) 123-45-67</p>
+							<p class="my-1 text-gray-600 dark:text-gray-300">+7 (495) 123-45-67</p>
 						</div>
-						<div class="contact-item">
-							<h3>Email</h3>
-							<p>info@ispprovider.ru</p>
-							<p>support@ispprovider.ru</p>
+						<div class="mb-8 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+							<h3 class="mb-2 text-[#4a9eff]">Email</h3>
+							<p class="my-1 text-gray-600 dark:text-gray-300">info@ispprovider.ru</p>
+							<p class="my-1 text-gray-600 dark:text-gray-300">support@ispprovider.ru</p>
 						</div>
-						<div class="contact-item">
-							<h3>Адрес</h3>
-							<p>г. Москва, ул. Примерная, д. 1</p>
+						<div class="mb-8 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+							<h3 class="mb-2 text-[#4a9eff]">Адрес</h3>
+							<p class="my-1 text-gray-600 dark:text-gray-300">г. Москва, ул. Примерная, д. 1</p>
 						</div>
-						<div class="contact-item">
-							<h3>Режим работы</h3>
-							<p>Пн-Пт: 9:00 - 20:00</p>
-							<p>Сб-Вс: 10:00 - 18:00</p>
+						<div class="mb-8 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+							<h3 class="mb-2 text-[#4a9eff]">Режим работы</h3>
+							<p class="my-1 text-gray-600 dark:text-gray-300">Пн-Пт: 9:00 - 20:00</p>
+							<p class="my-1 text-gray-600 dark:text-gray-300">Сб-Вс: 10:00 - 18:00</p>
 						</div>
 					</div>
-					<div class="contacts-forms">
+					<div>
 						<ContactForm />
-						<div style="margin-top: 2rem;">
+						<div class="mt-8">
 							<CallbackForm />
 						</div>
 					</div>
@@ -49,42 +49,3 @@ import CallbackForm from '../components/CallbackForm.astro';
 
 	<Footer />
 </BaseLayout>
-
-<style>
-	.contacts-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 3rem;
-		margin-top: 2rem;
-	}
-
-	.contacts-info h2 {
-		margin-bottom: 2rem;
-		color: #1a1a2e;
-	}
-
-	.contact-item {
-		margin-bottom: 2rem;
-		padding: 1.5rem;
-		background: white;
-		border-radius: 10px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
-
-	.contact-item h3 {
-		margin-bottom: 0.5rem;
-		color: #4a9eff;
-	}
-
-	.contact-item p {
-		margin: 0.25rem 0;
-		color: #666;
-	}
-
-	@media (max-width: 968px) {
-		.contacts-grid {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
-

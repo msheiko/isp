@@ -1,118 +1,66 @@
 ---
 ---
 
-<header class="header">
-	<div class="container">
-		<div class="header__content">
-			<a href="/" class="header__logo">
-				<span class="logo-text">ISP Provider</span>
+<header class="bg-[#1a1a2e] dark:bg-gray-800 text-white py-4 sticky top-0 z-[100] shadow-lg">
+	<div class="container mx-auto px-4 md:px-8 max-w-7xl">
+		<div class="flex justify-between items-center">
+			<a href="/" class="text-2xl font-bold text-[#4a9eff]">
+				<span>ISP Provider</span>
 			</a>
-			<nav class="header__nav" x-data="{ open: false }">
+			<div class="flex items-center gap-4">
 				<button 
-					class="header__menu-toggle"
+					class="p-2 rounded-md hover:bg-white/10 transition-colors"
+					x-data="{ 
+						dark: false,
+						init() {
+							this.dark = document.documentElement.classList.contains('dark');
+							// Слушаем изменения темы
+							const observer = new MutationObserver(() => {
+								this.dark = document.documentElement.classList.contains('dark');
+							});
+							observer.observe(document.documentElement, {
+								attributes: true,
+								attributeFilter: ['class']
+							});
+						},
+						toggle() {
+							this.dark = !this.dark;
+							if (this.dark) {
+								document.documentElement.classList.add('dark');
+							} else {
+								document.documentElement.classList.remove('dark');
+							}
+							localStorage.setItem('theme', this.dark ? 'dark' : 'light');
+						}
+					}"
+					@click="toggle()"
+					aria-label="Переключить тему"
+				>
+					<span x-show="!dark" class="text-2xl">🌙</span>
+					<span x-show="dark" class="text-2xl">☀️</span>
+				</button>
+				<nav class="relative" x-data="{ open: false }">
+				<button 
+					class="md:hidden flex flex-col gap-1 bg-transparent border-none cursor-pointer p-2"
 					@click="open = !open"
 					aria-label="Меню"
 				>
-					<span></span>
-					<span></span>
-					<span></span>
+					<span class="w-6 h-0.5 bg-white transition-all"></span>
+					<span class="w-6 h-0.5 bg-white transition-all"></span>
+					<span class="w-6 h-0.5 bg-white transition-all"></span>
 				</button>
-				<ul class="header__nav-list" :class="{ 'is-open': open }">
-					<li><a href="/">Главная</a></li>
-					<li><a href="/tariffs">Тарифы</a></li>
-					<li><a href="/coverage">Покрытие</a></li>
-					<li><a href="/news">Новости</a></li>
-					<li><a href="/contacts">Контакты</a></li>
+				<ul 
+					class="hidden md:flex md:static md:flex-row md:gap-8 absolute md:relative top-full left-0 right-0 bg-[#1a1a2e] dark:bg-gray-800 flex-col p-4 gap-4 -translate-y-full md:translate-y-0 opacity-0 md:opacity-100 invisible md:visible transition-all duration-300 list-none m-0 z-50"
+					:class="{ 'flex translate-y-0 opacity-100 visible': open }"
+				>
+					<li><a href="/" class="text-white no-underline transition-colors hover:text-[#4a9eff]">Главная</a></li>
+					<li><a href="/tariffs" class="text-white no-underline transition-colors hover:text-[#4a9eff]">Тарифы</a></li>
+					<li><a href="/coverage" class="text-white no-underline transition-colors hover:text-[#4a9eff]">Покрытие</a></li>
+					<li><a href="/news" class="text-white no-underline transition-colors hover:text-[#4a9eff]">Новости</a></li>
+					<li><a href="/contacts" class="text-white no-underline transition-colors hover:text-[#4a9eff]">Контакты</a></li>
 				</ul>
 			</nav>
+			</div>
 		</div>
 	</div>
 </header>
-
-<style>
-	.header {
-		background: #1a1a2e;
-		color: white;
-		padding: 1rem 0;
-		position: sticky;
-		top: 0;
-		z-index: 100;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-	}
-
-	.header__content {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.header__logo {
-		font-size: 1.5rem;
-		font-weight: bold;
-		color: #4a9eff;
-		text-decoration: none;
-	}
-
-	.header__nav-list {
-		display: flex;
-		gap: 2rem;
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
-
-	.header__nav-list a {
-		color: white;
-		text-decoration: none;
-		transition: color 0.3s;
-	}
-
-	.header__nav-list a:hover {
-		color: #4a9eff;
-	}
-
-	.header__menu-toggle {
-		display: none;
-		flex-direction: column;
-		gap: 4px;
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 0.5rem;
-	}
-
-	.header__menu-toggle span {
-		width: 25px;
-		height: 3px;
-		background: white;
-		transition: all 0.3s;
-	}
-
-	@media (max-width: 768px) {
-		.header__menu-toggle {
-			display: flex;
-		}
-
-		.header__nav-list {
-			position: absolute;
-			top: 100%;
-			left: 0;
-			right: 0;
-			background: #1a1a2e;
-			flex-direction: column;
-			padding: 1rem;
-			gap: 1rem;
-			transform: translateY(-100%);
-			opacity: 0;
-			visibility: hidden;
-			transition: all 0.3s;
-		}
-
-		.header__nav-list.is-open {
-			transform: translateY(0);
-			opacity: 1;
-			visibility: visible;
-		}
-	}
-</style>
-

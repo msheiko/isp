@@ -6,11 +6,14 @@ import Footer from '../components/Footer.astro';
 import CallbackForm from '../components/CallbackForm.astro';
 import TariffCalculator from '../components/TariffCalculator.astro';
 import NewsCard from '../components/NewsCard.astro';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const allNews = await getCollection('news');
 const latestNews = allNews
 	.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-	.slice(0, 3);
+	.slice(0, 6);
 ---
 
 <BaseLayout title="Главная - ISP Provider">
@@ -18,79 +21,86 @@ const latestNews = allNews
 	
 	<main>
 		<!-- Hero Section -->
-		<section class="hero">
-			<div class="container">
-				<div class="hero__content">
-					<h1 class="hero__title">Быстрый и надежный интернет</h1>
-					<p class="hero__subtitle">Подключитесь к лучшему интернет-провайдеру в вашем городе</p>
-					<div class="hero__buttons">
-						<a href="/tariffs" class="btn btn-primary btn-large">Выбрать тариф</a>
-						<a href="/coverage" class="btn btn-outline btn-large">Проверить покрытие</a>
+		<section class="bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-white py-24 text-center">
+			<div class="container mx-auto px-4 md:px-8 max-w-7xl">
+				<div class="max-w-3xl mx-auto">
+					<h1 class="text-5xl md:text-6xl font-bold mb-4">Быстрый и надежный интернет</h1>
+					<p class="text-2xl md:text-3xl mb-8 opacity-90">Подключитесь к лучшему интернет-провайдеру в вашем городе</p>
+					<div class="flex gap-4 justify-center flex-wrap">
+						<a href="/tariffs" class="px-10 py-4 rounded-md text-lg transition-all bg-[#4a9eff] text-white hover:bg-[#357abd] no-underline">Выбрать тариф</a>
+						<a href="/coverage" class="px-10 py-4 rounded-md text-lg transition-all bg-transparent text-white border-2 border-white hover:bg-white hover:text-[#1a1a2e] no-underline">Проверить покрытие</a>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Features Section -->
-		<section class="section">
-			<div class="container">
-				<h2 class="section-title">Почему выбирают нас</h2>
-				<div class="features">
-					<div class="feature">
-						<div class="feature__icon">⚡</div>
-						<h3>Высокая скорость</h3>
-						<p>До 1000 Мбит/с для комфортной работы и развлечений</p>
+		<section class="py-16 md:py-24">
+			<div class="container mx-auto px-4 md:px-8 max-w-7xl">
+				<h2 class="text-4xl md:text-5xl mb-4 text-[#1a1a2e] dark:text-white text-center">Почему выбирают нас</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+					<div class="text-center p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+						<div class="text-5xl mb-4">⚡</div>
+						<h3 class="mb-4 text-[#1a1a2e] dark:text-white">Высокая скорость</h3>
+						<p class="text-gray-600 dark:text-gray-300">До 1000 Мбит/с для комфортной работы и развлечений</p>
 					</div>
-					<div class="feature">
-						<div class="feature__icon">🛡️</div>
-						<h3>Надежность</h3>
-						<p>Стабильное соединение 24/7 с гарантией качества</p>
+					<div class="text-center p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+						<div class="text-5xl mb-4">🛡️</div>
+						<h3 class="mb-4 text-[#1a1a2e] dark:text-white">Надежность</h3>
+						<p class="text-gray-600 dark:text-gray-300">Стабильное соединение 24/7 с гарантией качества</p>
 					</div>
-					<div class="feature">
-						<div class="feature__icon">💰</div>
-						<h3>Доступные цены</h3>
-						<p>Лучшее соотношение цена/качество на рынке</p>
+					<div class="text-center p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+						<div class="text-5xl mb-4">💰</div>
+						<h3 class="mb-4 text-[#1a1a2e] dark:text-white">Доступные цены</h3>
+						<p class="text-gray-600 dark:text-gray-300">Лучшее соотношение цена/качество на рынке</p>
 					</div>
-					<div class="feature">
-						<div class="feature__icon">📞</div>
-						<h3>Поддержка 24/7</h3>
-						<p>Круглосуточная техническая поддержка</p>
+					<div class="text-center p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+						<div class="text-5xl mb-4">📞</div>
+						<h3 class="mb-4 text-[#1a1a2e] dark:text-white">Поддержка 24/7</h3>
+						<p class="text-gray-600 dark:text-gray-300">Круглосуточная техническая поддержка</p>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Tariff Calculator Section -->
-		<section class="section section-alt">
-			<div class="container">
+		<section class="py-16 md:py-24 bg-white dark:bg-gray-800">
+			<div class="container mx-auto px-4 md:px-8 max-w-7xl">
 				<TariffCalculator />
 			</div>
 		</section>
 
 		<!-- News Section -->
-		<section class="section">
-			<div class="container">
-				<h2 class="section-title">Последние новости</h2>
-				<div class="news-grid">
-					{latestNews.map((entry) => (
-						<NewsCard entry={entry} />
-					))}
+		<section class="py-16 md:py-24">
+			<div class="container mx-auto px-4 md:px-8 max-w-7xl">
+				<h2 class="text-4xl md:text-5xl mb-4 text-[#1a1a2e] dark:text-white text-center">Последние новости</h2>
+				<div class="swiper news-swiper mt-12 pb-12">
+					<div class="swiper-wrapper">
+						{latestNews.map((entry) => (
+							<div class="swiper-slide">
+								<NewsCard entry={entry} />
+							</div>
+						))}
+					</div>
+					<div class="swiper-pagination"></div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
 				</div>
-				<div class="text-center" style="margin-top: 2rem;">
-					<a href="/news" class="btn btn-primary">Все новости</a>
+				<div class="text-center mt-8">
+					<a href="/news" class="px-8 py-3 rounded-md text-base transition-all bg-[#4a9eff] text-white hover:bg-[#357abd] no-underline inline-block">Все новости</a>
 				</div>
 			</div>
 		</section>
 
 		<!-- Callback Section -->
-		<section class="section section-alt">
-			<div class="container">
-				<div class="callback-section">
-					<div class="callback-section__content">
-						<h2>Нужна консультация?</h2>
-						<p>Оставьте заявку на обратный звонок, и наш специалист свяжется с вами в течение 15 минут</p>
+		<section class="py-16 md:py-24 bg-white dark:bg-gray-800">
+			<div class="container mx-auto px-4 md:px-8 max-w-7xl">
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+					<div>
+						<h2 class="text-4xl mb-4 text-[#1a1a2e] dark:text-white">Нужна консультация?</h2>
+						<p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">Оставьте заявку на обратный звонок, и наш специалист свяжется с вами в течение 15 минут</p>
 					</div>
-					<div class="callback-section__form">
+					<div>
 						<CallbackForm />
 					</div>
 				</div>
@@ -101,161 +111,82 @@ const latestNews = allNews
 	<Footer />
 </BaseLayout>
 
+<script>
+	import Swiper from 'swiper';
+	import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
+	function initSwiper() {
+		const swiperEl = document.querySelector('.news-swiper');
+		if (swiperEl && !swiperEl.swiper) {
+			new Swiper('.news-swiper', {
+				modules: [Navigation, Pagination, Autoplay],
+				slidesPerView: 1,
+				spaceBetween: 20,
+				autoplay: {
+					delay: 5000,
+					disableOnInteraction: false,
+				},
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true,
+				},
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				},
+				breakpoints: {
+					640: {
+						slidesPerView: 2,
+						spaceBetween: 20,
+					},
+					1024: {
+						slidesPerView: 3,
+						spaceBetween: 30,
+					},
+				},
+			});
+		}
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initSwiper);
+	} else {
+		initSwiper();
+	}
+</script>
+
 <style>
-	.hero {
-		background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-		color: white;
-		padding: 6rem 0;
-		text-align: center;
+	.news-swiper {
+		padding-bottom: 3rem;
 	}
 
-	.hero__content {
-		max-width: 800px;
-		margin: 0 auto;
+	.news-swiper :global(.swiper-pagination-bullet) {
+		background: #4a9eff;
+		opacity: 0.5;
 	}
 
-	.hero__title {
-		font-size: 3rem;
-		margin-bottom: 1rem;
+	.news-swiper :global(.swiper-pagination-bullet-active) {
+		opacity: 1;
+		background: #4a9eff;
+	}
+
+	.news-swiper :global(.swiper-button-next),
+	.news-swiper :global(.swiper-button-prev) {
+		color: #4a9eff;
+	}
+
+	:global(.dark) .news-swiper :global(.swiper-button-next),
+	:global(.dark) .news-swiper :global(.swiper-button-prev) {
+		color: #4a9eff;
+	}
+
+	.news-swiper :global(.swiper-button-next:after),
+	.news-swiper :global(.swiper-button-prev:after) {
+		font-size: 1.5rem;
 		font-weight: bold;
 	}
 
-	.hero__subtitle {
-		font-size: 1.5rem;
-		margin-bottom: 2rem;
-		opacity: 0.9;
-	}
-
-	.hero__buttons {
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	.btn {
-		padding: 0.75rem 2rem;
-		border-radius: 5px;
-		text-decoration: none;
-		font-size: 1rem;
-		transition: all 0.3s;
-		display: inline-block;
-		cursor: pointer;
-		border: 2px solid transparent;
-	}
-
-	.btn-primary {
-		background: var(--primary-color);
-		color: white;
-	}
-
-	.btn-primary:hover {
-		background: var(--primary-dark);
-	}
-
-	.btn-outline {
-		background: transparent;
-		color: white;
-		border-color: white;
-	}
-
-	.btn-outline:hover {
-		background: white;
-		color: #1a1a2e;
-	}
-
-	.btn-large {
-		padding: 1rem 2.5rem;
-		font-size: 1.1rem;
-	}
-
-	.features {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 2rem;
-		margin-top: 3rem;
-	}
-
-	.feature {
-		text-align: center;
-		padding: 2rem;
-		background: white;
-		border-radius: 10px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
-
-	.feature__icon {
-		font-size: 3rem;
-		margin-bottom: 1rem;
-	}
-
-	.feature h3 {
-		margin-bottom: 1rem;
-		color: #1a1a2e;
-	}
-
-	.feature p {
-		color: var(--text-light);
-	}
-
-	.section-alt {
-		background: white;
-	}
-
-	.news-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 2rem;
-	}
-
-	.callback-section {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 3rem;
-		align-items: center;
-	}
-
-	.callback-section__content h2 {
-		font-size: 2rem;
-		margin-bottom: 1rem;
-		color: #1a1a2e;
-	}
-
-	.callback-section__content p {
-		font-size: 1.1rem;
-		color: var(--text-light);
-		line-height: 1.8;
-	}
-
-	.text-center {
-		text-align: center;
-	}
-
-	@media (max-width: 968px) {
-		.callback-section {
-			grid-template-columns: 1fr;
-		}
-	}
-
-	@media (max-width: 768px) {
-		.hero {
-			padding: 4rem 0;
-		}
-
-		.hero__title {
-			font-size: 2rem;
-		}
-
-		.hero__subtitle {
-			font-size: 1.2rem;
-		}
-
-		.features {
-			grid-template-columns: 1fr;
-		}
-
-		.news-grid {
-			grid-template-columns: 1fr;
-		}
+	.news-swiper :global(.swiper-slide) {
+		height: auto;
 	}
 </style>

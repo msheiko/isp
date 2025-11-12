@@ -15,10 +15,10 @@ const news = allNews.sort((a, b) =>
 	<Header />
 	
 	<main>
-		<section class="section">
-			<div class="container">
-				<h1 class="section-title">Новости</h1>
-				<div class="news-grid">
+		<section class="py-16 md:py-24">
+			<div class="container mx-auto px-4 md:px-8 max-w-7xl">
+				<h1 class="text-4xl md:text-5xl mb-4 text-[#1a1a2e] dark:text-white text-center">Новости</h1>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
 					{news.map((entry) => (
 						<NewsCard entry={entry} />
 					))}
@@ -29,19 +29,3 @@ const news = allNews.sort((a, b) =>
 
 	<Footer />
 </BaseLayout>
-
-<style>
-	.news-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 2rem;
-		margin-top: 2rem;
-	}
-
-	@media (max-width: 768px) {
-		.news-grid {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
-
