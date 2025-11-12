@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TariffCalculator from '../components/TariffCalculator.astro';
+---
+
+<BaseLayout title="Тарифы - ISP Provider">
+	<Header />
+	
+	<main>
+		<section class="section">
+			<div class="container">
+				<h1 class="section-title">Тарифные планы</h1>
+				<p class="section-subtitle">Выберите подходящий тариф для ваших потребностей</p>
+				<TariffCalculator />
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>
+

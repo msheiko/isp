@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import NewsCard from '../components/NewsCard.astro';
+
+const allNews = await getCollection('news');
+const news = allNews.sort((a, b) => 
+	b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+---
+
+<BaseLayout title="Новости - ISP Provider">
+	<Header />
+	
+	<main>
+		<section class="section">
+			<div class="container">
+				<h1 class="section-title">Новости</h1>
+				<div class="news-grid">
+					{news.map((entry) => (
+						<NewsCard entry={entry} />
+					))}
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>
+
+<style>
+	.news-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	@media (max-width: 768px) {
+		.news-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+

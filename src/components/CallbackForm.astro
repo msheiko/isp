@@ -1,0 +1,116 @@
+---
+---
+
+<div class="callback-form" x-data="{ 
+	phone: '', 
+	submitted: false,
+	loading: false,
+	submitForm() {
+		this.loading = true;
+		setTimeout(() => {
+			this.submitted = true;
+			this.loading = false;
+			this.phone = '';
+			setTimeout(() => this.submitted = false, 3000);
+		}, 1000);
+	}
+}">
+	<h2>Заказать обратный звонок</h2>
+	<form @submit.prevent="submitForm()" x-show="!submitted">
+		<div class="form-group">
+			<label for="callback-phone">Ваш телефон</label>
+			<input 
+				type="tel" 
+				id="callback-phone"
+				x-model="phone"
+				placeholder="+7 (___) ___-__-__"
+				required
+			/>
+		</div>
+		<button type="submit" :disabled="loading" class="btn btn-primary">
+			<span x-show="!loading">Заказать звонок</span>
+			<span x-show="loading">Отправка...</span>
+		</button>
+	</form>
+	<div x-show="submitted" class="success-message">
+		<p>Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+	</div>
+</div>
+
+<style>
+	.callback-form {
+		background: white;
+		padding: 2rem;
+		border-radius: 10px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.callback-form h2 {
+		margin-top: 0;
+		margin-bottom: 1.5rem;
+		color: #1a1a2e;
+	}
+
+	.form-group {
+		margin-bottom: 1.5rem;
+	}
+
+	.form-group label {
+		display: block;
+		margin-bottom: 0.5rem;
+		color: #333;
+		font-weight: 500;
+	}
+
+	.form-group input {
+		width: 100%;
+		padding: 0.75rem;
+		border: 2px solid #e0e0e0;
+		border-radius: 5px;
+		font-size: 1rem;
+		transition: border-color 0.3s;
+	}
+
+	.form-group input:focus {
+		outline: none;
+		border-color: #4a9eff;
+	}
+
+	.btn {
+		padding: 0.75rem 2rem;
+		border: none;
+		border-radius: 5px;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: all 0.3s;
+	}
+
+	.btn-primary {
+		background: #4a9eff;
+		color: white;
+	}
+
+	.btn-primary:hover:not(:disabled) {
+		background: #357abd;
+	}
+
+	.btn:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	.success-message {
+		background: #d4edda;
+		color: #155724;
+		padding: 1rem;
+		border-radius: 5px;
+		text-align: center;
+	}
+
+	@media (max-width: 768px) {
+		.callback-form {
+			padding: 1.5rem;
+		}
+	}
+</style>
+

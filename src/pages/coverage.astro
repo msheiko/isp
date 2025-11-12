@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CoverageMap from '../components/CoverageMap.astro';
+---
+
+<BaseLayout title="Карта покрытия - ISP Provider">
+	<Header />
+	
+	<main>
+		<section class="section">
+			<div class="container">
+				<h1 class="section-title">Карта покрытия</h1>
+				<p class="section-subtitle">Проверьте доступность интернета в вашем районе</p>
+				<CoverageMap />
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>
+

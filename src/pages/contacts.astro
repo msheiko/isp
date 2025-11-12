@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
+import CallbackForm from '../components/CallbackForm.astro';
+---
+
+<BaseLayout title="Контакты - ISP Provider">
+	<Header />
+	
+	<main>
+		<section class="section">
+			<div class="container">
+				<h1 class="section-title">Контакты</h1>
+				<div class="contacts-grid">
+					<div class="contacts-info">
+						<h2>Свяжитесь с нами</h2>
+						<div class="contact-item">
+							<h3>Телефон</h3>
+							<p>+7 (800) 123-45-67</p>
+							<p>+7 (495) 123-45-67</p>
+						</div>
+						<div class="contact-item">
+							<h3>Email</h3>
+							<p>info@ispprovider.ru</p>
+							<p>support@ispprovider.ru</p>
+						</div>
+						<div class="contact-item">
+							<h3>Адрес</h3>
+							<p>г. Москва, ул. Примерная, д. 1</p>
+						</div>
+						<div class="contact-item">
+							<h3>Режим работы</h3>
+							<p>Пн-Пт: 9:00 - 20:00</p>
+							<p>Сб-Вс: 10:00 - 18:00</p>
+						</div>
+					</div>
+					<div class="contacts-forms">
+						<ContactForm />
+						<div style="margin-top: 2rem;">
+							<CallbackForm />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>
+
+<style>
+	.contacts-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		margin-top: 2rem;
+	}
+
+	.contacts-info h2 {
+		margin-bottom: 2rem;
+		color: #1a1a2e;
+	}
+
+	.contact-item {
+		margin-bottom: 2rem;
+		padding: 1.5rem;
+		background: white;
+		border-radius: 10px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.contact-item h3 {
+		margin-bottom: 0.5rem;
+		color: #4a9eff;
+	}
+
+	.contact-item p {
+		margin: 0.25rem 0;
+		color: #666;
+	}
+
+	@media (max-width: 968px) {
+		.contacts-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+

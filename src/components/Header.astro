@@ -1,0 +1,118 @@
+---
+---
+
+<header class="header">
+	<div class="container">
+		<div class="header__content">
+			<a href="/" class="header__logo">
+				<span class="logo-text">ISP Provider</span>
+			</a>
+			<nav class="header__nav" x-data="{ open: false }">
+				<button 
+					class="header__menu-toggle"
+					@click="open = !open"
+					aria-label="Меню"
+				>
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
+				<ul class="header__nav-list" :class="{ 'is-open': open }">
+					<li><a href="/">Главная</a></li>
+					<li><a href="/tariffs">Тарифы</a></li>
+					<li><a href="/coverage">Покрытие</a></li>
+					<li><a href="/news">Новости</a></li>
+					<li><a href="/contacts">Контакты</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
+
+<style>
+	.header {
+		background: #1a1a2e;
+		color: white;
+		padding: 1rem 0;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	}
+
+	.header__content {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.header__logo {
+		font-size: 1.5rem;
+		font-weight: bold;
+		color: #4a9eff;
+		text-decoration: none;
+	}
+
+	.header__nav-list {
+		display: flex;
+		gap: 2rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.header__nav-list a {
+		color: white;
+		text-decoration: none;
+		transition: color 0.3s;
+	}
+
+	.header__nav-list a:hover {
+		color: #4a9eff;
+	}
+
+	.header__menu-toggle {
+		display: none;
+		flex-direction: column;
+		gap: 4px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.5rem;
+	}
+
+	.header__menu-toggle span {
+		width: 25px;
+		height: 3px;
+		background: white;
+		transition: all 0.3s;
+	}
+
+	@media (max-width: 768px) {
+		.header__menu-toggle {
+			display: flex;
+		}
+
+		.header__nav-list {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background: #1a1a2e;
+			flex-direction: column;
+			padding: 1rem;
+			gap: 1rem;
+			transform: translateY(-100%);
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.3s;
+		}
+
+		.header__nav-list.is-open {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+</style>
+
